@@ -17,5 +17,6 @@ export const rejectCustomError = async () => {
 export class MyAwesomeError extends Error {
   constructor() {
     super('This is my awesome custom error!');
+    this.message = 'This is my awesome custom error!';
   }
 }
