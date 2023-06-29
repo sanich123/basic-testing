@@ -1,14 +1,15 @@
-// import axios from 'axios';
+import axios from 'axios';
 import { throttledGetDataFromApi } from './index';
 jest.useFakeTimers();
+
 describe('throttledGetDataFromApi', () => {
   test('should create instance with provided base url', async () => {
-    // Write your test here
+    const createSpy = jest.spyOn(axios, 'create');
+    await throttledGetDataFromApi('/todos');
+    expect(createSpy).toHaveBeenCalled();
   });
 
-  test('should perform request to correct provided url', async () => {
-    // Write your test here
-  });
+  test('should perform request to correct provided url', async () => {});
 
   test('should return response data', async () => {
     try {

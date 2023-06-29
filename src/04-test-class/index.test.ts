@@ -65,9 +65,8 @@ describe('BankAccount', () => {
     try {
       await ourBankAccount.synchronizeBalance();
     } catch (error) {
-      console.log(error);
       if (error instanceof SynchronizationFailedError) {
-        expect(error).toBe(SynchronizationFailedError.toString());
+        expect(error).toEqual(SynchronizationFailedError);
       }
     }
   });
