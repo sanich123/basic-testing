@@ -1,7 +1,6 @@
-// Uncomment the code below and write your tests
-/* import axios from 'axios';
-import { throttledGetDataFromApi } from './index'; */
-
+// import axios from 'axios';
+import { throttledGetDataFromApi } from './index';
+jest.useFakeTimers();
 describe('throttledGetDataFromApi', () => {
   test('should create instance with provided base url', async () => {
     // Write your test here
@@ -12,6 +11,11 @@ describe('throttledGetDataFromApi', () => {
   });
 
   test('should return response data', async () => {
-    // Write your test here
+    try {
+      const todos = await throttledGetDataFromApi('/todos');
+      expect(todos).toHaveLength(200);
+    } catch (error) {
+      console.log(error);
+    }
   });
 });

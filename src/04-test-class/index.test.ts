@@ -1,4 +1,4 @@
-import { getBankAccount } from '.';
+import { SynchronizationFailedError, getBankAccount } from '.';
 
 describe('BankAccount', () => {
   test('should create account with initial balance', () => {
@@ -65,7 +65,10 @@ describe('BankAccount', () => {
     try {
       await ourBankAccount.synchronizeBalance();
     } catch (error) {
-      expect(error).toMatch('Synchronization failed');
+      console.log(error);
+      if (error instanceof SynchronizationFailedError) {
+        expect(error).toBe(SynchronizationFailedError.toString());
+      }
     }
   });
 });

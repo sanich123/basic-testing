@@ -20,3 +20,11 @@ export const doStuffByTimeout = (callback: () => void, timeout: number) => {
 export const doStuffByInterval = (callback: () => void, interval: number) => {
   setInterval(callback, interval);
 };
+
+export function timerGame(callback: () => void) {
+  console.log('Ready....go!');
+  setTimeout(() => {
+    console.log("Time's up -- stop!");
+    callback && callback();
+  }, 1000);
+}
