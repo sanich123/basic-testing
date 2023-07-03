@@ -1,39 +1,42 @@
-// Uncomment the code below and write your tests
-// import { readFileAsynchronously, doStuffByTimeout, doStuffByInterval } from '.';
-
+import { doStuffByInterval, doStuffByTimeout } from '.';
 describe('doStuffByTimeout', () => {
-  beforeAll(() => {
-    jest.useFakeTimers();
-  });
-
-  afterAll(() => {
-    jest.useRealTimers();
-  });
+  beforeAll(() => jest.useFakeTimers());
+  afterAll(() => jest.useRealTimers());
 
   test('should set timeout with provided callback and timeout', () => {
-    // Write your test here
+    const setTimeoutSpy = jest.spyOn(global, 'setTimeout');
+    const callbackFn = jest.fn();
+    doStuffByTimeout(callbackFn, 2000);
+    expect(setTimeoutSpy).toHaveBeenCalled();
+    expect(setTimeoutSpy).toHaveBeenLastCalledWith(callbackFn, 2000);
   });
 
   test('should call callback only after timeout', () => {
-    // Write your test here
+    const callbackFn = jest.fn();
+    doStuffByTimeout(callbackFn, 3000);
+    expect(callbackFn).not.toBeCalled();
+    jest.runAllTimers();
+    expect(callbackFn).toBeCalled();
   });
 });
 
 describe('doStuffByInterval', () => {
-  beforeAll(() => {
-    jest.useFakeTimers();
-  });
-
-  afterAll(() => {
-    jest.useRealTimers();
-  });
+  beforeAll(() => jest.useFakeTimers());
+  afterAll(() => jest.useRealTimers());
 
   test('should set interval with provided callback and timeout', () => {
-    // Write your test here
+    const setTimeoutSpy = jest.spyOn(global, 'setInterval');
+    const callbackFn = jest.fn();
+    doStuffByInterval(callbackFn, 2000);
+    expect(setTimeoutSpy).toHaveBeenCalled();
+    expect(setTimeoutSpy).toHaveBeenLastCalledWith(callbackFn, 2000);
   });
 
   test('should call callback multiple times after multiple intervals', () => {
-    // Write your test here
+    const callbackFn = jest.fn();
+    doStuffByInterval(callbackFn, 2000);
+    jest.advanceTimersByTime(10000);
+    expect(callbackFn).toHaveBeenCalledTimes(5);
   });
 });
 

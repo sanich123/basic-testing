@@ -1,17 +1,81 @@
-// Uncomment the code below and write your tests
-/* import {  simpleCalculator, Action } from './index';
+import { simpleCalculator, Action } from './index';
 
-const testCases = [
+type testCasesType = {
+  a: number | undefined | null;
+  b: number | undefined | null;
+  action: Action | string;
+  expected: number | null;
+}[];
+
+describe('simpleCalculator', () => {
+  const testCasesAdd: testCasesType = [
     { a: 1, b: 2, action: Action.Add, expected: 3 },
     { a: 2, b: 2, action: Action.Add, expected: 4 },
     { a: 3, b: 2, action: Action.Add, expected: 5 },
-    // continue cases for other actions    
-]; */
+  ];
 
-describe('simpleCalculator', () => {
-  // This test case is just to run this test suite, remove it when you write your own tests
-  test('should blah-blah', () => {
-    expect(true).toBe(true);
-  });
-  // Consider to use Jest table tests API to test all cases above
+  it.each(testCasesAdd)(
+    `should correctly add numbers`,
+    ({ a, b, action, expected }) =>
+      expect(simpleCalculator({ a, b, action })).toEqual(expected),
+  );
+
+  const testCasesSubtract: testCasesType = [
+    { a: 1, b: 2, action: Action.Subtract, expected: -1 },
+    { a: 2, b: 2, action: Action.Subtract, expected: 0 },
+    { a: 3, b: 2, action: Action.Subtract, expected: 1 },
+  ];
+
+  it.each(testCasesSubtract)(
+    `should correctly subtract numbers`,
+    ({ a, b, action, expected }) =>
+      expect(simpleCalculator({ a, b, action })).toEqual(expected),
+  );
+
+  const testCasesMultiply: testCasesType = [
+    { a: 1, b: 2, action: Action.Multiply, expected: 2 },
+    { a: 2, b: 2, action: Action.Multiply, expected: 4 },
+    { a: 3, b: 2, action: Action.Multiply, expected: 6 },
+  ];
+
+  it.each(testCasesMultiply)(
+    `should correctly multiply numbers`,
+    ({ a, b, action, expected }) =>
+      expect(simpleCalculator({ a, b, action })).toEqual(expected),
+  );
+
+  const testCasesDivide: testCasesType = [
+    { a: 4, b: 2, action: Action.Divide, expected: 2 },
+    { a: 6, b: 2, action: Action.Divide, expected: 3 },
+    { a: 8, b: 2, action: Action.Divide, expected: 4 },
+  ];
+
+  it.each(testCasesDivide)(
+    `should correctly divide numbers`,
+    ({ a, b, action, expected }) =>
+      expect(simpleCalculator({ a, b, action })).toEqual(expected),
+  );
+
+  const testCasesExponentiate: testCasesType = [
+    { a: 4, b: 2, action: Action.Divide, expected: 2 },
+    { a: 6, b: 2, action: Action.Divide, expected: 3 },
+    { a: 8, b: 2, action: Action.Divide, expected: 4 },
+  ];
+
+  it.each(testCasesExponentiate)(
+    `should correctly exponentiate numbers`,
+    ({ a, b, action, expected }) =>
+      expect(simpleCalculator({ a, b, action })).toEqual(expected),
+  );
+
+  const testCasesErrors: testCasesType = [
+    { a: 4, b: 2, action: 'some action', expected: null },
+    { a: 6, b: null, action: Action.Divide, expected: null },
+    { a: undefined, b: 2, action: Action.Divide, expected: null },
+  ];
+  it.each(testCasesErrors)(
+    `should correctly handle errors`,
+    ({ a, b, action, expected }) =>
+      expect(simpleCalculator({ a, b, action })).toEqual(expected),
+  );
 });
