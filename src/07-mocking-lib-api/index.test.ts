@@ -9,7 +9,9 @@ describe('throttledGetDataFromApi', () => {
     expect(createSpy).toHaveBeenCalled();
   });
 
-  test('should perform request to correct provided url', async () => {});
+  test('should perform request to correct provided url', async () => {
+    //something do there
+  });
 
   test('should return response data', async () => {
     try {
